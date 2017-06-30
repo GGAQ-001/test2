@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery无限加载插件scrollpagination.js - 素材家园（www.sucaijiayuan.com）</title>
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/scrollpagination.js"></script>
+<link href="css/scrollpagination_demo.css" rel="stylesheet" media="screen" />
+<script type="text/javascript">
+$(function(){
+	$('#content').scrollPagination({
+		'contentPage': 'sucaijiayuan.html', // the url you are fetching the results
+		'contentData': {}, // these are the variables you can pass to the request, for example: children().size() to know which page you are
+		'scrollTarget': $(window), // who gonna scroll? in this example, the full window
+		'heightOffset': 10, // it gonna request when scroll is 10 pixels before the page ends
+		'beforeLoad': function(){ // before load function, you can display a preloader div
+			$('#loading').fadeIn();	
+		},
+		'afterLoad': function(elementsLoaded){ // after loading content, you can use this function to animate your new elements
+			 $('#loading').fadeOut();
+			 var i = 0;
+			 $(elementsLoaded).fadeInWithDelay();
+			 if ($('#content').children().size() > 50){ // if more than 100 results already loaded, then stop pagination (only for testing)
+			 	$('#nomoreresults').fadeIn();
+				$('#content').stopScrollPagination();
+			 }
+		}
+	});
+	
+	// code for fade in element by element
+	$.fn.fadeInWithDelay = function(){
+		var delay = 0;
+		return this.each(function(){
+			$(this).delay(delay).animate({opacity:1}, 200);
+			delay += 100;
+		});
+	};
+		   
+});
+</script>
+</head>
+<body>
+<div id="scrollpaginationdemo">
+    <div class="about">
+        <h1>jQuery ScrollPagination</h1>
+        <p>jQuery ScrollPagination plugin has been developed by Anderson Ferminiano for studying purposes, you may use it for free in any project you want, please maintain the credits.</p>
+
+    </div>
+     <div class="about">
+    	<h1>Sources</h1>
+        <p><a href="https://github.com/andferminiano/jquery-scroll-pagination" target="_blank">Github me!</a></p>
+    </div>
+    <div class="about">
+    	<h1>Example</h1>
+        <textarea readonly="readonly">
+           $(function(){
+                $('#content').scrollPagination({
+                    'contentPage': 'democontent.html', // the url you are fetching the results
+                    'contentData': {}, // these are the variables you can pass to the request, for example: children().size() to know which page you are
+                    'scrollTarget': $(window), // who gonna scroll? in this example, the full window
+                    'heightOffset': 10, // it gonna request when scroll is 10 pixels before the page ends
+                    'beforeLoad': function(){ // before load function, you can display a preloader div
+                        $('#loading').fadeIn();
+                    },
+                    'afterLoad': function(elementsLoaded){ // after loading content, you can use this function to animate your new elements
+                         $('#loading').fadeOut();
+                         var i = 0;
+                         $(elementsLoaded).fadeInWithDelay();
+                         if ($('#content').children().size() > 100){ // if more than 100 results already loaded, then stop pagination (only for testing)
+                            $('#nomoreresults').fadeIn();
+                            $('#content').stopScrollPagination();
+                         }
+                    }
+                });
+
+                // code for fade in element by element
+                $.fn.fadeInWithDelay = function(){
+                    var delay = 0;
+                    return this.each(function(){
+                        $(this).delay(delay).animate({opacity:1}, 200);
+                        delay += 100;
+                    });
+                };
+                       
+            });
+        </textarea>
+    </div>
+	<ul id="content">
+    	<li><p>素材家园专注于提供免费素材下载,其内容涵盖设计素材,PSD素材,矢量素材,图片素材,图标素材,设计字体等免费素材.下载免费素材尽在素材家园免费素材网</p></li>
+    	<li><p>素材家园专注于提供免费素材下载,其内容涵盖设计素材,PSD素材,矢量素材,图片素材,图标素材,设计字体等免费素材.下载免费素材尽在素材家园免费素材网</p></li>
+    	<li><p>素材家园专注于提供免费素材下载,其内容涵盖设计素材,PSD素材,矢量素材,图片素材,图标素材,设计字体等免费素材.下载免费素材尽在素材家园免费素材网</p></li>
+    	<li><p>素材家园专注于提供免费素材下载,其内容涵盖设计素材,PSD素材,矢量素材,图片素材,图标素材,设计字体等免费素材.下载免费素材尽在素材家园免费素材网</p></li>
+        <li><p>素材家园专注于提供免费素材下载,其内容涵盖设计素材,PSD素材,矢量素材,图片素材,图标素材,设计字体等免费素材.下载免费素材尽在素材家园免费素材网</p></li>
+    	<li><p>素材家园专注于提供免费素材下载,其内容涵盖设计素材,PSD素材,矢量素材,图片素材,图标素材,设计字体等免费素材.下载免费素材尽在素材家园免费素材网</p></li>
+        <li><p>素材家园专注于提供免费素材下载,其内容涵盖设计素材,PSD素材,矢量素材,图片素材,图标素材,设计字体等免费素材.下载免费素材尽在素材家园免费素材网</p></li>
+    	<li><p>素材家园专注于提供免费素材下载,其内容涵盖设计素材,PSD素材,矢量素材,图片素材,图标素材,设计字体等免费素材.下载免费素材尽在素材家园免费素材网</p></li>
+    </ul>
+    <div class="loading" id="loading">loading...</div>
+    <div class="loading" id="nomoreresults">加载完毕！</div>
+</div>
+</body>
+</html>
